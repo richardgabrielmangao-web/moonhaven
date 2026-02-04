@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LÁVERRA</title>
+    <link rel="icon" href="data:image/svg+xml,&lt;svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22&gt;&lt;text y=%22.9em%22 font-size=%2290%22&gt;🌙&lt;/text&gt;&lt;/svg&gt;">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
+
+    <style>
+
+
+        /* Search Bar Responsive */
+        .search-bar {
+            width: 0;
+            padding: 6px 0;
+            border: 1px solid transparent;
+            border-radius: 6px;
+            outline: none;
+            transition: all 0.3s ease;
+            opacity: 0;
+            background: #5a189a;
+        }
+        .search-bar.active {
+            width: 130px; 
+            padding: 6px 10px;
+            border: 1px solid #5a189a;
+            opacity: 1;
+        }
+
+        /* Carousel Scaling */
+        .carousel-container {
+            width: 100%;
+            max-width: 850px;
+            overflow: hidden;
+            margin: auto;
+            border-radius: 8px;
+        }
+        .carousel-slide {
+            display: flex;
+            animation: slide 12s infinite;
+        }
+        .carousel-slide img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+        @media (min-width: 768px) {
+            .carousel-slide img { height: 400px; }
+            .search-bar.active { width: 220px; }
+        }
+
+        @keyframes slide {
+            0% { transform: translateX(0); }
+            33% { transform: translateX(-100%); }
+            66% { transform: translateX(-200%); }
+            100% { transform: translateX(0); }
+        }
+        #mobileMenu {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+}
+
+#mobileMenu.open {
+    max-height: 300px;
+}
+.navbar-custom {
+    background-color: #e0aaff;
+}
+
+    </style>
+</head>
+
+<body>
+
+<nav class="shadow-lg fixed top-0 left-0 w-full z-[9999] bg-[#e0aaff]">
+  <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+
+    <!-- Logo -->
+    <div class="flex items-center space-x-2">
+      <a href="home.html"> <img src="/LOGO.png" width="50" alt="Logo"></a>
+      <span class="text-xl font-serif text-[#5a189a] tracking-widest">LÁVERRA</span>
+    </div>
+
+    <!-- Desktop Menu -->
+      <div class="hidden md:flex items-center space-x-6">
+      <a href="shop.html" class="text-[#5a189a] font-semibold hover:text-[#7b2cbf]">SHOP</a>
+      <a href="cart.html" class="text-[#5a189a] hover:text-[#7b2cbf]">
+        <i class="fas fa-shopping-bag text-xl"></i>
+      </a>
+      <a href="us.html" class="text-[#5a189a] font-semibold hover:text-[#7b2cbf]">ABOUT US</a>
+     <a href="mem.html" class="text-[#5a189a] font-semibold hover:text-[#7b2cbf]"><i class="fa-solid fa-user"></i></a>
+    </div>
+    <!-- Mobile Menu Button -->
+    <button class="md:hidden text-[#5a189a] text-2xl" onclick="toggleMobileMenu()">
+      <i class="fas fa-bars" id="menuIcon"></i>
+    </button>
+
+  </div>
+
+  <!-- Mobile Menu -->
+  <div id="mobileMenu" class="md:hidden bg-white border-t border-[#5a189a]">
+    <div class="flex flex-col p-4 space-y-4 text-center">
+      <a href="shop.html" class="text-[#5a189a] font-bold text-lg">SHOP</a>
+      <a href="cart.html" class="text-[#5a189a] font-bold text-lg">
+      CART
+        <a href="us.html" class="text-[#5a189a] font-bold text-lg">ABOUT US</a>
+        <a href="mem.html" class="text-[#5a189a] font-semibold hover:text-[#7b2cbf]"><i class="fa-solid fa-user"></i></a>
+      </a>
+    </div>
+  </div>
+</nav>
+<div class="h-[70px]"></div>
+
+<section class="relative w-full h-[100vh] flex items-center justify-center text-center">
+  <video 
+    class="absolute w-full h-full object-cover"
+    autoplay 
+    muted 
+    loop 
+    playsinline>
+    <source src="/4b017364-ab84-4f35-978d-80991f997fca.mp4" type="video/mp4">
+  </video>
+  <!-- Dark Overlay (for better text visibility) -->
+  <div class="absolute inset-0 bg-black/30"></div>
+
+  <!-- Text Content -->
+<div class="relative z-10 text-white px-6">
+  <h1 class="text-4xl md:text-6xl font-serif tracking-widest mb-4">
+    LÁVERRA
+  </h1>
+
+  <p class="text-lg md:text-xl mb-6">
+ We created this company in the hopes that we can offer many consumers a product that encourages eco-friendly packages and a soap that is made from organic ingredients. The name "Láverra" is a word we created by deriving it from Lavender which is the foundation of our company's existence. We are here and ready to serve you with a smile and give you the satisfaction you deserve because we are your daily dose of calm.
+  </p>
+
+  <!-- Shop Now Button -->
+  <a href="shop.html" 
+     class="inline-block px-8 py-3 bg-[#e0aaff] text-[#5a189a] font-semibold rounded-full 
+            hover:bg-[#c77dff] hover:text-white transition duration-300 shadow-lg">
+    Shop Now
+  </a>
+</div>
+
+</section>
+<!-- Footer -->
+<footer class="bg-[#5a189a] text-white mt-20">
+  <div class="container mx-auto px-6 py-10 grid grid-cols-1 md:grid-cols-3 gap-8">
+
+    <!-- Brand -->
+    <div>
+      <h2 class="text-2xl font-serif tracking-widest mb-3">LÁVERRA</h2>
+      <p class="text-sm opacity-80">Lavender, Your Daly Dose Of calm.</p>
+    </div>
+
+    <!-- Quick Links -->
+    <div>
+      <h3 class="text-lg font-semibold mb-3">Quick Links</h3>
+      <ul class="space-y-2 text-sm">
+        <li><a href="shop.html" class="hover:text-[#e0aaff] transition">Shop</a></li>
+        <li><a href="cart.html" class="hover:text-[#e0aaff] transition">Cart</a></li>
+        <li><a href="us.html" class="hover:text-[#e0aaff] transition">About us</a></li>
+      </ul>
+    </div>
+
+    <!-- Social / Contact -->
+    <div>
+      <h3 class="text-lg font-semibold mb-3">Connect With Us</h3>
+      <div class="flex space-x-4 text-xl">
+        <a href="https://www.facebook.com/profile.php?id=61587299824182" class="hover:text-[#e0aaff] transition"><i class="fab fa-facebook"></i></a>
+        <a href="https://www.instagram.com/laverra.co/" class="hover:text-[#e0aaff] transition"><i class="fab fa-instagram"></i></a>
+
+      </div>
+      <p class="text-sm mt-3 opacity-80">Email: laverra246@gmail.com</p>
+    </div>
+
+  </div>
+
+  <!-- Bottom Bar -->
+  <div class="border-t border-white/20 text-center py-4 text-sm opacity-70">
+    © 2026 LÁVERRA. All rights reserved.
+  </div>
+</footer>
+
+<script>
+// Close menus when clicking outside
+document.addEventListener('click', (e) => {
+    if (!e.target.closest('.search-container')) {
+        document.getElementById("searchBar").classList.remove("active");
+        document.getElementById("searchResults").style.display = "none";
+    }
+});
+function toggleMobileMenu() {
+  const menu = document.getElementById("mobileMenu");
+  const icon = document.getElementById("menuIcon");
+
+  menu.classList.toggle("open");
+
+  if (menu.classList.contains("open")) {
+    icon.classList.replace("fa-bars", "fa-times");
+  } else {
+    icon.classList.replace("fa-times", "fa-bars");
+  }
+}
+
+</script>
+
+</body>
+</html>
