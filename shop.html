@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Moon Haven | LÁVERRA</title>
+    <link rel="icon" href="data:image/svg+xml,&lt;svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22&gt;&lt;text y=%22.9em%22 font-size=%2290%22&gt;🌙&lt;/text&gt;&lt;/svg&gt;">
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
+
+<style>
+    body {
+        background-color: #240046;
+        color: #2c1608;
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        text-align: center;
+    }
+
+    /* Navbar */
+    #mobileMenu {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+    }
+    #mobileMenu.open { max-height: 300px; }
+
+    .navbar-custom { background-color: #e0aaff; }
+
+    /* Product Container */
+    .container {
+        max-width: 900px;
+        margin: 120px auto 50px auto; /* push below navbar */
+        background: #F0EAD6;
+        padding: 20px;
+        border-radius: 10px;
+    }
+
+    .add-to-bag {
+        background: #10002b;
+        color: white;
+        padding: 12px;
+        width: 100%;
+        border: none;
+        cursor: pointer;
+        font-size: 16px;
+        margin-top: 15px;
+        border-radius: 5px;
+    }
+    .add-to-bag:hover { background-color: #c77dff; }
+
+    .p1 { font-family: "Times New Roman", Times, serif; }
+    h1 { font-size: 60px; }
+    h2 { font-size: 25px; }
+    p { font-size: 20px; }
+    img { border-radius: 10px; margin: 15px 0; }
+</style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="shadow-lg fixed top-0 left-0 w-full z-[100] bg-[#e0aaff]">
+<div class="mx-auto px-6 py-3 flex justify-between items-center max-w-screen-xl">
+
+    <!-- Logo -->
+    <div class="flex items-center space-x-2">
+      <a href="home.html"> <img src="/LOGO.png" width="50" alt="Logo"></a>
+      <span class="text-xl font-serif text-[#5a189a] tracking-widest">LÁVERRA</span>
+    </div>
+
+    <!-- Desktop Menu -->
+    <div class="hidden md:flex items-center space-x-6">
+      <a href="cart.html" class="text-[#5a189a] hover:text-[#7b2cbf]">
+        <i class="fas fa-shopping-bag text-xl"></i>
+      </a>
+      <a href="mem.html" class="text-[#5a189a] font-semibold hover:text-[#7b2cbf]">
+        <i class="fa-solid fa-user"></i>
+      </a>
+      <a href="us.html" class="text-[#5a189a] font-semibold text-lg">ABOUT US</a>
+    </div>
+
+    <!-- Mobile Menu Button -->
+    <button class="md:hidden text-[#5a189a] text-2xl" onclick="toggleMobileMenu()">
+      <i class="fas fa-bars" id="menuIcon"></i>
+    </button>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div id="mobileMenu" class="md:hidden bg-white border-t border-[#5a189a]">
+    <div class="flex flex-col p-4 space-y-4 text-center">
+<a href="mem.html" class="text-[#5a189a] font-semibold hover:text-[#7b2cbf]">
+  <i class="fa-solid fa-user"></i>
+</a>
+      <a href="cart.html" class="text-[#5a189a] font-bold text-lg">
+       CART
+      </a>
+      <a href="us.html" class="text-[#5a189a] font-bold text-lg">ABOUT US</a>
+    </div>
+  </div>
+</nav>
+
+<!-- Product Container -->
+<div class="product-container mx-auto bg-[#F0EAD6] rounded-2xl shadow-lg p-6 md:p-10 mt-32 w-11/12 max-w-4xl">
+    <h1 class="p1 text-4xl md:text-5xl mb-6">MOON HAVEN</h1>
+
+    <img src="/c21041e4-3f79-4dbb-bc6f-246a490237f3.jpg" alt="Moon Haven Soap" class="mx-auto w-64 md:w-80 rounded-xl mb-6">
+
+    <h2 class="p1 text-2xl md:text-3xl mb-4">Relax in haven, feel refreshed like never before!</h2>
+
+    <p class="text-base md:text-lg mb-6">
+       Glycerin (70 g), goat’s milk (30 g), lavender essential oil (½ teaspoon), aloe vera (¼ cup), oat milk (¼ cup), vitamin E extracts (1 tablespoon), purple food coloring (⅛ teaspoon), dried lavender buds (⅙ teaspoon), and lemon or citric acid (⅛ cup) were used in the soap. These ingredients help moisturize, nourish, and protect the skin, while lavender provides a calming scent and aloe vera and oat milk soothe the skin, making the soap gentle, refreshing, and beneficial for healthy skin.
+    </p>
+
+    <button class="add-to-bag w-full md:w-1/2 mx-auto mb-4" onclick="addToCart()">Add to Cart</button>
+    <button class="add-to-bag w-full md:w-1/2 mx-auto" onclick="goToCart()">Go to Cart</button>
+</div>
+
+
+<script>
+function addToCart() {
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    cart.push({
+        name: "Moon Haven Soap",
+        price: 69.00,
+        img: "/c21041e4-3f79-4dbb-bc6f-246a490237f3.jpg"
+    });
+    localStorage.setItem('cart', JSON.stringify(cart));
+    alert("Item added to cart!");
+}
+
+function goToCart() {
+    window.location.href = 'cart.html';
+}
+
+function toggleMobileMenu() {
+  const menu = document.getElementById("mobileMenu");
+  const icon = document.getElementById("menuIcon");
+  menu.classList.toggle("open");
+  if (menu.classList.contains("open")) {
+    icon.classList.replace("fa-bars", "fa-times");
+  } else {
+    icon.classList.replace("fa-times", "fa-bars");
+  }
+}
+</script>
+
+</body>
+</html>

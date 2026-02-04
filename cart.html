@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shopping Cart | LÁVERRA</title>
+    <link rel="icon" href="data:image/svg+xml,&lt;svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22&gt;&lt;text y=%22.9em%22 font-size=%2290%22&gt;🌙&lt;/text&gt;&lt;/svg&gt;">
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
+
+<style>
+    body {
+        background-color: #e0aaff;
+        color: white;
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        text-align: center;
+    }
+
+    /* Navbar */
+    #mobileMenu {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+    }
+    #mobileMenu.open { max-height: 300px; }
+
+    /* Container */
+    .container {
+        max-width: 800px;
+        margin: 120px auto 50px auto; /* push below navbar */
+        background: #9d4edd;
+        padding: 20px;
+        border-radius: 10px;
+    }
+
+    .cart-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: #240046;
+        padding: 10px;
+        margin: 10px 0;
+        border-radius: 8px;
+        gap: 10px;
+    }
+
+    .cart-item img {
+        width: 70px;
+        border-radius: 6px;
+    }
+
+    .cart-info {
+        flex: 1;
+        text-align: left;
+        padding-left: 10px;
+    }
+
+    .checkout {
+        background: #240046;
+        color: white;
+        padding: 12px;
+        width: 100%;
+        border: none;
+        cursor: pointer;
+        font-size: 18px;
+        margin-top: 15px;
+        border-radius: 6px;
+    }
+
+    .checkout:hover { background: #5a189a; }
+
+    button {
+        padding: 6px 12px;
+        background: #5a189a;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    button:hover { background: #7b2cbf; }
+
+    .total {
+        font-size: 22px;
+        margin-top: 10px;
+        color: white;
+    }
+
+    .logo {
+        float: left;
+        margin-right: 10px;
+    }
+</style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="shadow-lg fixed top-0 left-0 w-full z-[9999] bg-[#e0aaff]">
+    <div class="mx-auto px-6 py-3 flex justify-between items-center max-w-screen-xl">
+
+        <!-- Logo -->
+        <div class="flex items-center space-x-2">
+            <a href="home.html"><img src="LOGO.png" width="50" alt="Logo"></a>
+            <span class="text-xl font-serif text-[#5a189a] tracking-widest">LÁVERRA</span>
+        </div>
+
+        <!-- Desktop Menu -->
+        <div class="hidden md:flex items-center space-x-6">
+     <a href="us.html" class="text-[#5a189a] font-bold text-lg">ABOUT US</a>
+           <a href="shop.html" class="text-[#5a189a] font-bold text-lg">SHOP</a>
+            <a href="mem.html" class="text-[#5a189a] font-semibold hover:text-[#7b2cbf]">
+                <i class="fa-solid fa-user"></i>
+            </a>
+        </div>
+
+        <!-- Mobile Menu Button -->
+        <button class="md:hidden text-[#5a189a] text-2xl" onclick="toggleMobileMenu()">
+            <i class="fas fa-bars" id="menuIcon"></i>
+        </button>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="md:hidden bg-white border-t border-[#5a189a]">
+        <div class="flex flex-col p-4 space-y-4 text-center">
+            <a href="shop.html" class="text-[#5a189a] font-bold text-lg">SHOP</a>
+            <a href="mem.html" class="text-[#5a189a] font-semibold hover:text-[#7b2cbf]"><i class="fa-solid fa-user"></i></a>
+            <a href="us.html" class="text-[#5a189a] font-bold text-lg">ABOUT US</a>
+        </div>
+    </div>
+</nav>
+
+<!-- Cart Container -->
+<div class="container">
+    <h1>Your Cart</h1>
+    <div id="cart-items"></div>
+    <p class="total">Total: <span id="total-price">₱0.00</span></p>
+    <button class="checkout" onclick="checkout()">Checkout</button>
+</div>
+
+<script>
+function loadCart() {
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    let cartContainer = document.getElementById("cart-items");
+    let totalPrice = 0;
+
+    cartContainer.innerHTML = "";
+
+    if (cart.length === 0) {
+        cartContainer.innerHTML = "<p>Your cart is empty.</p>";
+    } else {
+        cart.forEach((item, index) => {
+            totalPrice += item.price;
+
+            cartContainer.innerHTML += `
+                <div class="cart-item">
+                    <img src="${item.img}" alt="${item.name}">
+                    <div class="cart-info">
+                        <strong>${item.name}</strong>
+                    </div>
+                    <div>₱${item.price.toFixed(2)}</div>
+                    <button onclick="removeItem(${index})">Remove</button>
+                </div>
+            `;
+        });
+    }
+
+    document.getElementById("total-price").innerText = `₱${totalPrice.toFixed(2)}`;
+}
+
+function removeItem(index) {
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    cart.splice(index, 1);
+    localStorage.setItem('cart', JSON.stringify(cart));
+    loadCart();
+}
+
+function checkout() {
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    if (cart.length === 0) {
+        alert("Your cart is empty! Add items before checkout.");
+    } else {
+        alert("Your order has been dispatched. Thank you for ordering!");
+        localStorage.removeItem('cart');
+        loadCart();
+    }
+}
+
+function toggleMobileMenu() {
+    const menu = document.getElementById("mobileMenu");
+    const icon = document.getElementById("menuIcon");
+    menu.classList.toggle("open");
+    if (menu.classList.contains("open")) {
+        icon.classList.replace("fa-bars", "fa-times");
+    } else {
+        icon.classList.replace("fa-times", "fa-bars");
+    }
+}
+
+loadCart();
+</script>
+
+</body>
+</html>
